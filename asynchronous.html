@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather</title>
 </head>
+
 <body>
     <h1>Weather</h1>
     <script>
-    
+    function getWeather(location) {
+        fetch(`http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${location}`)
+            .then(result => {
+                //console.log(result)
+                return result.json();
+            })
+            .then(data => {
+                //console.log(data))
+                const today = data.consolidated_weather[0];
+                console.log(`temperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}`)
+            })
+            .catch(error => console.log(error));
+
+    }
+    getWeather(2487956);
+    getWeather(44418);
+    getWeather(523920);
+    getWeather(111);
     </script>
 </body>
+
 </html>
